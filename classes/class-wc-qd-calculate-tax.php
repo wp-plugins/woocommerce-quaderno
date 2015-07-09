@@ -57,6 +57,8 @@ class WC_QD_Calculate_Tax {
 			set_transient( $slug, $tax, WEEK_IN_SECONDS );
 		}
 
+		if( is_null($tax->name) ) $tax->name = __( 'Taxes', 'woocommerce-quaderno' );
+
 		return $tax;
 	}
 

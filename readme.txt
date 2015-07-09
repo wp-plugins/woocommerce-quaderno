@@ -4,7 +4,7 @@ Contributors: polimorfico
 Tags: woocommerce, quaderno, woocommerce quaderno, vat, eu vat, vatmoss, vat moss, european vat, eu tax, european tax, billing, invoicing, receipts
 Requires at least: 3.7
 Tested up to: 4.2
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,5 +53,8 @@ If you have any questions please get in touch with us at hello@quaderno.io.
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.1 =
+* Show generic tax name when no taxes apply
+
+= 1.0.0 =
 * First version
