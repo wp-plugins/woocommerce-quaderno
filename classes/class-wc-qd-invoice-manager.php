@@ -69,7 +69,10 @@ class WC_QD_Invoice_Manager {
 			}
 		}
 		$invoice->addContact($contact);
-	
+
+		// Calculate exchange rate
+		$exchange_rate = get_post_meta( $order->id, '_woocs_order_rate', true ) ?: 1;
+
 		// Add items
 		$virtual_products = false;
 		$items = $order->get_items();
@@ -83,7 +86,7 @@ class WC_QD_Invoice_Manager {
 			$new_item = new QuadernoItem(array(
 				'description' => $item['name'],
 				'quantity' => $order->get_item_count($item),
-				'unit_price' => $order->get_item_subtotal($item),
+				'unit_price' => $order->get_line_subtotal($item) * $exchange_rate,
 				'tax_1_name' => $tax->name,
 				'tax_1_rate' => $tax->rate
 			));
@@ -93,7 +96,7 @@ class WC_QD_Invoice_Manager {
 		// Add the payment
 		$payment = new QuadernoPayment(array(
 			'date' => date('Y-m-d'),
-			'amount' => $order->get_total(),
+			'amount' => $order->get_total() * $exchange_rate,
 			'payment_method' => 'credit_card'
 		));
 		$invoice->addPayment( $payment );

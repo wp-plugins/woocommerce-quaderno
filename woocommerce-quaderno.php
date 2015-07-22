@@ -3,7 +3,7 @@
 	Plugin Name: WooCommerce Quaderno
 	Plugin URI: https://wordpress.org/plugins/woocommerce-quaderno/
 	Description: Use Quaderno services in your WooCommerce shop.
-	Version: 1.0.1
+	Version: 1.1.0
 	Author: Quaderno
 	Author URI: https://quaderno.io/
 	License: GPL v3
@@ -36,7 +36,7 @@ if ( ! function_exists( 'woothemes_queue_update' ) ) {
  */
 class WooCommerce_Quaderno {
 
-	const VERSION = '1.0.1';
+	const VERSION = '1.1.0';
 	const QUADERNO_URL = 'https://quadernoapp.com';
 
 	/**
