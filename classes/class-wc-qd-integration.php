@@ -49,7 +49,7 @@ class WC_QD_Integration extends WC_Integration {
 			),
 			'api_url'  => array(
 				'title'       => __( 'API URL', 'woocommerce-quaderno' ),
-				'description' => __( 'Get this token from your Quaderno account.', 'woocommerce-quaderno' ),
+				'description' => __( 'Get this URL from your Quaderno account.', 'woocommerce-quaderno' ),
 				'type'        => 'text'
 			),
 			'autosend_invoices' => array(

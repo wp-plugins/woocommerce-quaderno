@@ -86,7 +86,7 @@ class WC_QD_Invoice_Manager {
 			$new_item = new QuadernoItem(array(
 				'description' => $item['name'],
 				'quantity' => $order->get_item_count($item),
-				'unit_price' => $order->get_line_subtotal($item) * $exchange_rate,
+				'unit_price' => round($order->get_line_subtotal($item) * $exchange_rate, 2),
 				'tax_1_name' => $tax->name,
 				'tax_1_rate' => $tax->rate
 			));
@@ -96,7 +96,7 @@ class WC_QD_Invoice_Manager {
 		// Add the payment
 		$payment = new QuadernoPayment(array(
 			'date' => date('Y-m-d'),
-			'amount' => $order->get_total() * $exchange_rate,
+			'amount' => round($order->get_total() * $exchange_rate, 2),
 			'payment_method' => 'credit_card'
 		));
 		$invoice->addPayment( $payment );
