@@ -28,6 +28,7 @@ class WC_QD_Invoice_Manager {
 			'issue_date' => date('Y-m-d'),
 			'currency' => $order->order_currency,
 			'po_number' => $order->id,
+			'tag_list' => 'woocommerce',
 			'notes' => $order->order_comments
 		));
 
@@ -86,7 +87,7 @@ class WC_QD_Invoice_Manager {
 			$new_item = new QuadernoItem(array(
 				'description' => $item['name'],
 				'quantity' => $order->get_item_count($item),
-				'unit_price' => round($order->get_line_subtotal($item) * $exchange_rate, 2),
+				'unit_price' => round($order->get_item_subtotal($item) * $exchange_rate, 2),
 				'tax_1_name' => $tax->name,
 				'tax_1_rate' => $tax->rate
 			));
