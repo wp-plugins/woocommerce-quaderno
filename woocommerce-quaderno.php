@@ -3,7 +3,7 @@
 	Plugin Name: WooCommerce Quaderno
 	Plugin URI: https://wordpress.org/plugins/woocommerce-quaderno/
 	Description: Use Quaderno services in your WooCommerce shop.
-	Version: 1.2.1
+	Version: 1.3.1
 	Author: Quaderno
 	Author URI: https://quaderno.io/
 	License: GPL v3
@@ -36,7 +36,7 @@ if ( ! function_exists( 'woothemes_queue_update' ) ) {
  */
 class WooCommerce_Quaderno {
 
-	const VERSION = '1.2.1';
+	const VERSION = '1.3.1';
 	const QUADERNO_URL = 'https://quadernoapp.com';
 
 	/**
@@ -135,6 +135,10 @@ class WooCommerce_Quaderno {
 		// Setup Invoice manager
 		$invoice_manager = new WC_QD_Invoice_Manager();
 		$invoice_manager->setup();
+		
+		// Setup Credit manager
+		$credit_manager = new WC_QD_Credit_Manager();
+		$credit_manager->setup();
 		
 		// Admin only classes
 		if ( is_admin() ) {

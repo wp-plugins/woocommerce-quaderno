@@ -15,36 +15,28 @@ abstract class QuadernoJSON
 {
 	public static function exec($url, $method, $username, $password, $data = null)
 	{
-		// Initialization
-		$ch = curl_init($url);
+    $args = array(
+  	  'method' => $method,
+  	  'headers' => array(
+  	    'Authorization' => 'Basic ' . base64_encode( $username . ':' . $password ),
+  	    'Content-Type' => 'application/json'
+  	  ),
+  	  'timeout' => 70,
+      'sslverify' => false
+  	);
 
-		// Encode data in JSON
-		$json = $data ? json_encode($data) : null;
+  	// Add the request body if we've got one
+  	if ( !is_null( $data ) && is_array( $data ) && count( $data ) > 0 ) {
+  		$args['body'] = json_encode( $data );
+  	}
 
-		// cURL configuration options
-		$options = array (
-			CURLOPT_RETURNTRANSFER => true,																 // Accept answer
-			CURLOPT_USERPWD => $username.':'.$password,								 		 // User and password
-			CURLOPT_CUSTOMREQUEST => $method,															 // HTTP method to use
-			CURLOPT_HTTPHEADER => array('Content-type: application/json')	 // JSON headers
-			);
-
-		if ($json) $options += array(CURLOPT_POSTFIELDS => $json);
-
-		curl_setopt_array($ch, $options);
-
-		// Get results
-		$result = array();
-		$result['data'] = curl_exec($ch);
-		$result['error'] = curl_errno($ch);
-		$result['format_error'] = curl_error($ch);
-		$result += curl_getinfo($ch);
-		curl_close($ch);
+  	// Get results
+  	$response = wp_remote_request($url, $args);
 
 		// Decode data
-		if ($result['data'])
-			$result['data'] = json_decode($result['data'], true);
+		if ($response['body'])
+			$response['body'] = json_decode($response['body'], true);
 
-		return $result;
+    return $response;
 	}
 }

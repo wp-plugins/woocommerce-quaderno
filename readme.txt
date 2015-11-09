@@ -3,8 +3,8 @@ Author URI: http://quaderno.io
 Contributors: polimorfico
 Tags: woocommerce, quaderno, woocommerce quaderno, vat, eu vat, vatmoss, vat moss, european vat, eu tax, european tax, billing, invoicing, receipts
 Requires at least: 3.7
-Tested up to: 4.3
-Stable tag: 1.2.1
+Tested up to: 4.3.1
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,8 @@ This plugin requires [WooCommerce](http://www.woothemes.com/woocommerce/) and a 
 Quaderno for WooCommerce allows a site owner to automatically calculate the EU VAT on the WooCommerce checkout page.
 
 After installation, whenever a payment is marked as complete, Quaderno sends a beautiful receipt to your customer and tracks the location evidences to comply the EU VAT rules for digital goods & services.
+
+Besides, Quaderno also sends a credit note when you create a refund on WooCommerce. Isn't this great?
 
 **Setup in less than 5 minutes**. Easy and quick!
 
@@ -53,7 +55,13 @@ If you have any questions please get in touch with us at hello@quaderno.io.
 
 == Changelog ==
 
-= 1.2.0 =
+= 1.3.1 =
+* Use wp_remote_request instead of curl
+
+= 1.3.0 =
+* Send credit notes for WooCommerce refunds
+
+= 1.2.3 =
 * Fix unit price calculation
 
 = 1.2.0 =

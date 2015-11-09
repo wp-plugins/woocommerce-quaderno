@@ -23,7 +23,7 @@ class WC_QD_Invoice_Manager {
 		}
 
 		QuadernoBase::init( WC_QD_Integration::$api_token, WC_QD_Integration::$api_url );
-		
+
 		$invoice = new QuadernoInvoice(array(
 			'issue_date' => date('Y-m-d'),
 			'currency' => $order->order_currency,
@@ -64,7 +64,7 @@ class WC_QD_Invoice_Manager {
 				'email' => $order->billing_email,
 				'tax_id' => get_post_meta( $order->id, WC_QD_Vat_Number_Field::META_KEY, true )
 			));
-		
+
 			if ( $contact->save() ){
 				add_user_meta( $order->get_user_id(), '_quaderno_contact', $contact->id, true );
 			}
@@ -89,7 +89,8 @@ class WC_QD_Invoice_Manager {
 				'quantity' => $order->get_item_count($item),
 				'unit_price' => round($order->get_item_subtotal($item) * $exchange_rate, 2),
 				'tax_1_name' => $tax->name,
-				'tax_1_rate' => $tax->rate
+				'tax_1_rate' => $tax->rate,
+				'tax_1_country' => $tax->country
 			));
 			$invoice->addItem( $new_item );
 		}
@@ -104,6 +105,7 @@ class WC_QD_Invoice_Manager {
 	
 		if ( $invoice->save() ) {
 			add_post_meta( $order->id, '_quaderno_invoice', $invoice->id );
+			add_post_meta( $order->id, '_quaderno_invoice_number', $invoice->number );
 		
 			if ( true === $virtual_products ) {
 				$evidence = new QuadernoEvidence(array(

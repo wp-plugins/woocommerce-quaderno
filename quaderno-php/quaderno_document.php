@@ -68,8 +68,8 @@ abstract class QuadernoDocument extends QuadernoModel
 
 		if (QuadernoBase::responseIsValid($response))
 			$return = true;
-		elseif (isset($response['data']['errors']))
-			$this->errors = $response['data']['errors'];
+		elseif (isset($response['body']['errors']))
+			$this->errors = $response['body']['errors'];
 
 		return $return;
 	}
