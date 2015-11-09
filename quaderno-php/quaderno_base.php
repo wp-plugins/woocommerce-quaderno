@@ -75,6 +75,6 @@ abstract class QuadernoBase
 
 	public static function responseIsValid($response)
 	{
-		return isset($response) && !$response['error'] && (int)($response['http_code'] / 100) == 2;
+	  return !is_wp_error($response) && wp_remote_retrieve_response_code($response) == '200';
 	}
 }

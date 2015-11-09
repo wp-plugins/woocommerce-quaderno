@@ -15,8 +15,9 @@ class QuadernoTax extends QuadernoModel
 		$response = QuadernoBase::calculate($params);
 		$return = false;
 
-		if (QuadernoBase::responseIsValid($response))
-			$return = new self($response['data']);
+		if ( QuadernoBase::responseIsValid($response) ) {
+			$return = new self($response['body']);
+		}
 
 		return $return;
 	}
