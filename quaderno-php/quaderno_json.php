@@ -11,6 +11,10 @@
 * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
+
 abstract class QuadernoJSON
 {
 	public static function exec($url, $method, $username, $password, $data = null)

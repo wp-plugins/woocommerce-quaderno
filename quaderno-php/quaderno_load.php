@@ -11,6 +11,10 @@
 * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
+
 // This can put quaderno wrapper in its own folder
 $quaderno_script_path = str_replace('\\', '/', dirname(__FILE__)).'/';
 

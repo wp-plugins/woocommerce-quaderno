@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
+
 class WC_QD_Vat_Number_Field {
 
 	const META_KEY = 'vat_number';

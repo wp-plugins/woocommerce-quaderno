@@ -8,6 +8,10 @@
 * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
+
 /* General interface that implements the calls to the message coding and transport library */
 abstract class QuadernoBase
 {

@@ -1,26 +1,34 @@
 <?php
-/*
-	Plugin Name: WooCommerce Quaderno
-	Plugin URI: https://wordpress.org/plugins/woocommerce-quaderno/
-	Description: Use Quaderno services in your WooCommerce shop.
-	Version: 1.3.1
-	Author: Quaderno
-	Author URI: https://quaderno.io/
-	License: GPL v3
 
-	This program is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+/**
+ * Plugin Name: WooCommerce Quaderno
+ * Plugin URI: https://wordpress.org/plugins/woocommerce-quaderno/
+ * Description: Quaderno replaces and improves the default WooCommerce receipts. Setup in less than 5 minutes.
+ * Version: 1.3.2
+ * Author: Quaderno
+ * Author URI: https://quaderno.io/
+ * License: GPL v3
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+/**
+ * Prevent data leaks
+ */
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
 
 /**
  * Required functions
@@ -36,7 +44,7 @@ if ( ! function_exists( 'woothemes_queue_update' ) ) {
  */
 class WooCommerce_Quaderno {
 
-	const VERSION = '1.3.1';
+	const VERSION = '1.3.2';
 	const QUADERNO_URL = 'https://quadernoapp.com';
 
 	/**
@@ -75,7 +83,7 @@ class WooCommerce_Quaderno {
 		// Check if WC is activated
 		if ( ! WC_Dependencies::woocommerce_active_check() ) {
 			add_action( 'admin_notices', array( $this, 'notice_activate_wc' ) );
-		} else if ( version_compare( WC_VERSION, '2.2.9', '<' ) ) {
+		} elseif ( version_compare( WC_VERSION, '2.3', '<' ) ) {
 			add_action( 'admin_notices', array( $this, 'notice_version_wc' ) );
 		} else {
 			$this->init();
@@ -208,6 +216,5 @@ function __woocommerce_quaderno_main() {
 	new WooCommerce_Quaderno();
 }
 
-// Create object - Plugin init
 add_action( 'plugins_loaded', '__woocommerce_quaderno_main' );
 
