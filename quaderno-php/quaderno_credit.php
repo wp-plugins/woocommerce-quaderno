@@ -1,6 +1,6 @@
 <?php
 /**
-* Quaderno Invoice
+* Quaderno Credit
 *
 * @package   Quaderno PHP
 * @author    Quaderno <hello@quaderno.io>
@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-class QuadernoInvoice extends QuadernoDocument
+class QuadernoCredit extends QuadernoDocument
 {
-	static protected $model = 'invoices';
+	static protected $model = 'credits';
 
 	public function deliver()
 	{

@@ -5,6 +5,11 @@
  *
  * Checks if WooCommerce is enabled
  */
+
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
+
 class WC_Dependencies {
 
 	private static $active_plugins;

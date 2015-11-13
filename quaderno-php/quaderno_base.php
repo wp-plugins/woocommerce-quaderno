@@ -8,6 +8,10 @@
 * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
+
 /* General interface that implements the calls to the message coding and transport library */
 abstract class QuadernoBase
 {
@@ -75,6 +79,6 @@ abstract class QuadernoBase
 
 	public static function responseIsValid($response)
 	{
-		return isset($response) && !$response['error'] && (int)($response['http_code'] / 100) == 2;
+	  return !is_wp_error($response) && wp_remote_retrieve_response_code($response) == '200';
 	}
 }

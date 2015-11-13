@@ -8,6 +8,10 @@
 * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
+if ( ! defined( 'ABSPATH' ) ) { 
+    exit; // Exit if accessed directly
+}
+
 /* Interface that implements every document: invoices, expenses, and estimates */
 abstract class QuadernoDocument extends QuadernoModel
 {
@@ -68,8 +72,8 @@ abstract class QuadernoDocument extends QuadernoModel
 
 		if (QuadernoBase::responseIsValid($response))
 			$return = true;
-		elseif (isset($response['data']['errors']))
-			$this->errors = $response['data']['errors'];
+		elseif (isset($response['body']['errors']))
+			$this->errors = $response['body']['errors'];
 
 		return $return;
 	}
