@@ -27,13 +27,12 @@ class WC_QD_Credit_Manager {
 			return;
 		}
 
-		QuadernoBase::init( WC_QD_Integration::$api_token, WC_QD_Integration::$api_url );
-
 		$credit = new QuadernoCredit(array(
 			'issue_date' => date('Y-m-d'),
 			'currency' => $refund->order_currency,
 			'po_number' => $order->id,
-			'tag_list' => 'woocommerce'
+			'processor' => 'woocommerce',
+			'processor_id' => $order->id
 		));
 
 		// Add the contact
@@ -106,7 +105,8 @@ class WC_QD_Credit_Manager {
 
 		if ( $credit->save() ) {
 			add_post_meta( $refund->id, '_quaderno_credit', $refund->id );
-			if ( true === WC_QD_Integration::$autosend_invoices ) $credit->deliver();
+
+			if ( 'yes' === WC_QD_Integration::$autosend_invoices ) $credit->deliver();
 		}
 	}
 

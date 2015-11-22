@@ -67,13 +67,12 @@ abstract class QuadernoDocument extends QuadernoModel
 	*/
 	protected function execDeliver()
 	{
-		$return = false;
-		$response = QuadernoBase::deliver(static::$model, $this->id);
+		$request = new QuadernoRequest();
+		$return = $request->deliver(static::$model, $this->id);
 
-		if (QuadernoBase::responseIsValid($response))
-			$return = true;
-		elseif (isset($response['body']['errors']))
-			$this->errors = $response['body']['errors'];
+		if ( !$return && isset($request->response['body']['errors']) ) {
+			$this->errors = $request->response['body']['errors'];
+		}
 
 		return $return;
 	}

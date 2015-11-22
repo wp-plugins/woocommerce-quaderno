@@ -1,6 +1,6 @@
 <?php
 /**
-* Quaderno Webhook
+* Quaderno Tax
 *
 * @package   Quaderno PHP
 * @author    Quaderno <hello@quaderno.io>
@@ -12,7 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-class QuadernoWebhook extends QuadernoModel {
-	static protected $model = 'webhooks';
+class QuadernoTax extends QuadernoModel {
+
+	public static function calculate($params) {
+		$return = false;
+		$request = new QuadernoRequest();
+		$request->calculate('taxes', $params);
+		return $request->get_response_body();
+	}
+
 }
 ?>

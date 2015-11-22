@@ -3,8 +3,8 @@
 /**
  * Plugin Name: WooCommerce Quaderno
  * Plugin URI: https://wordpress.org/plugins/woocommerce-quaderno/
- * Description: Quaderno replaces and improves the default WooCommerce receipts. Setup in less than 5 minutes.
- * Version: 1.3.2
+ * Description: Automatically send customizable invoices and receipts with every order in your WooCommerce store.
+ * Version: 1.4.0
  * Author: Quaderno
  * Author URI: https://quaderno.io/
  * License: GPL v3
@@ -44,7 +44,7 @@ if ( ! function_exists( 'woothemes_queue_update' ) ) {
  */
 class WooCommerce_Quaderno {
 
-	const VERSION = '1.3.2';
+	const VERSION = '1.4.0';
 	const QUADERNO_URL = 'https://quadernoapp.com';
 
 	/**
@@ -68,7 +68,7 @@ class WooCommerce_Quaderno {
 	 * @access private
 	 */
 	private static function setup_autoloader() {
-		require_once( plugin_dir_path( self::get_plugin_file() ) . '/quaderno-php/quaderno_load.php' );
+		require_once( plugin_dir_path( self::get_plugin_file() ) . '/quaderno/quaderno_load.php' );
 		require_once( plugin_dir_path( self::get_plugin_file() ) . '/classes/class-wc-qd-autoloader.php' );
 		$autoloader = new WC_QD_Autoloader();
 		spl_autoload_register( array( $autoloader, 'load' ) );
