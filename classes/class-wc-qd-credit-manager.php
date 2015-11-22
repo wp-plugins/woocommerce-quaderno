@@ -27,13 +27,12 @@ class WC_QD_Credit_Manager {
 			return;
 		}
 
-		QuadernoBase::init( WC_QD_Integration::$api_token, WC_QD_Integration::$api_url );
-
 		$credit = new QuadernoCredit(array(
 			'issue_date' => date('Y-m-d'),
 			'currency' => $refund->order_currency,
 			'po_number' => $order->id,
-			'tag_list' => 'woocommerce'
+			'processor' => 'woocommerce',
+			'processor_id' => $order->id
 		));
 
 		// Add the contact
@@ -86,7 +85,7 @@ class WC_QD_Credit_Manager {
 
 		// Add item
 		$refunded_amount = -round($refund->get_total() * $exchange_rate, 2);
-		$new_item = new QuadernoItem(array(
+		$new_item = new QuadernoDocumentItem(array(
 			'description' => 'Refund invoice #' . get_post_meta( $order->id, '_quaderno_invoice_number', true ),
 			'quantity' => 1,
 			'total_amount' => $refunded_amount,
@@ -106,7 +105,8 @@ class WC_QD_Credit_Manager {
 
 		if ( $credit->save() ) {
 			add_post_meta( $refund->id, '_quaderno_credit', $refund->id );
-			if ( true === WC_QD_Integration::$autosend_invoices ) $credit->deliver();
+
+			if ( 'yes' === WC_QD_Integration::$autosend_invoices ) $credit->deliver();
 		}
 	}
 

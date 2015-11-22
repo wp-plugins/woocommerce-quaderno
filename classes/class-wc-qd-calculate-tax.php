@@ -56,7 +56,6 @@ class WC_QD_Calculate_Tax {
 		$slug = 'tax_' . md5( implode( $params ) );
 		
 		if ( false === ( $tax = get_transient( $slug ) ) ) {
-			QuadernoBase::init( WC_QD_Integration::$api_token, WC_QD_Integration::$api_url );
 			$tax = QuadernoTax::calculate( $params );
 			set_transient( $slug, $tax, WEEK_IN_SECONDS );
 		}
