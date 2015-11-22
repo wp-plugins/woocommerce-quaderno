@@ -89,7 +89,7 @@ class WC_QD_Invoice_Manager {
 			}
 		
 			$tax = WC_QD_Calculate_Tax::calculate( $transaction_type, $contact->country, $contact->postal_code, $contact->tax_id );
-			$new_item = new QuadernoItem(array(
+			$new_item = new QuadernoDocumentItem(array(
 				'description' => $item['name'],
 				'quantity' => $order->get_item_count($item),
 				'unit_price' => round($order->get_item_subtotal($item) * $exchange_rate, 2),
