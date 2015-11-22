@@ -26,14 +26,13 @@ class WC_QD_Invoice_Manager {
 			return;
 		}
 
-		QuadernoBase::init( WC_QD_Integration::$api_token, WC_QD_Integration::$api_url );
-
 		$invoice = new QuadernoInvoice(array(
 			'issue_date' => date('Y-m-d'),
 			'currency' => $order->order_currency,
 			'po_number' => $order->id,
-			'tag_list' => 'woocommerce',
-			'notes' => $order->order_comments
+			'notes' => $order->order_comments,
+			'processor' => 'woocommerce',
+			'processor_id' => $order->id
 		));
 
 		// Add the contact
@@ -66,14 +65,16 @@ class WC_QD_Invoice_Manager {
 				'region' => $order->billing_region,
 				'country' => $order->billing_country,
 				'email' => $order->billing_email,
-				'tax_id' => get_post_meta( $order->id, WC_QD_Vat_Number_Field::META_KEY, true )
+				'tax_id' => get_post_meta( $order->id, WC_QD_Vat_Number_Field::META_KEY, true ),
+				'processor' => 'woocommerce',
+				'processor_id' => $order->get_user_id()
 			));
 
 			if ( $contact->save() ){
 				add_user_meta( $order->get_user_id(), '_quaderno_contact', $contact->id, true );
 			}
 		}
-		$invoice->addContact($contact);
+		$invoice->addContact( $contact );
 
 		// Calculate exchange rate
 		$exchange_rate = get_post_meta( $order->id, '_woocs_order_rate', true ) ?: 1;
@@ -98,7 +99,7 @@ class WC_QD_Invoice_Manager {
 			));
 			$invoice->addItem( $new_item );
 		}
-	
+
 		// Add the payment
 		$payment = new QuadernoPayment(array(
 			'date' => date('Y-m-d'),
@@ -106,11 +107,11 @@ class WC_QD_Invoice_Manager {
 			'payment_method' => 'credit_card'
 		));
 		$invoice->addPayment( $payment );
-	
+
 		if ( $invoice->save() ) {
 			add_post_meta( $order->id, '_quaderno_invoice', $invoice->id );
 			add_post_meta( $order->id, '_quaderno_invoice_number', $invoice->number );
-		
+
 			if ( true === $virtual_products ) {
 				$evidence = new QuadernoEvidence(array(
 					'document_id' => $invoice->id,
@@ -119,8 +120,8 @@ class WC_QD_Invoice_Manager {
 				));
 				$evidence->save();
 			}
-		
-			if ( true === WC_QD_Integration::$autosend_invoices ) $invoice->deliver();
+
+			if ( 'yes' === WC_QD_Integration::$autosend_invoices ) $invoice->deliver();
 		}
 	}
 

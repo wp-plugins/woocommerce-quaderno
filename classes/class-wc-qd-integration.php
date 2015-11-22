@@ -16,7 +16,7 @@ class WC_QD_Integration extends WC_Integration {
 	public function __construct() {
 		$this->id                 = 'quaderno';
 		$this->method_title       = __( 'Quaderno', 'woocommerce-quaderno' );
-		$this->method_description = __( sprintf( 'Quaderno allows WooCommerce users to comply with the EU VAT for digital goods and service, and send beautiful receipts to their customers. %sYou need a Quaderno account for this extension to work. %sClick here to sign up%s and get your access data.', '<br/>', '<a href="' . WooCommerce_Quaderno::QUADERNO_URL . '/signup" target="_blank">', '</a>' ), 'woocommerce-quaderno' );
+		$this->method_description = __( sprintf( 'Automatically send customizable invoices and receipts with every order in your store. Comply with local rules in US, Canada, Australia, New Zealand, Singapore, and the European Union.%sNote: You need a %sQuaderno account%s for this extension to work.', '<br>', '<a href="' . WooCommerce_Quaderno::QUADERNO_URL . '/signup" target="_blank">', '</a>' ), 'woocommerce-quaderno' );
 
 		// Load admin form
 		$this->init_form_fields();
@@ -69,7 +69,7 @@ class WC_QD_Integration extends WC_Integration {
 		}
 		?>
 		<div id="message" class="updated woocommerce-message">
-			<p><?php _e( '<strong>Quaderno</strong> is almost ready &#8211; Please configure your API keys to begin fetching tax rates.', 'woocommerce-quaderno' ); ?></p>
+			<p><?php _e( '<strong>Quaderno</strong> is almost ready &#8211; Please configure your API keys to start creating automatic invoices.', 'woocommerce-quaderno' ); ?></p>
 
 			<p class="submit"><a
 					href="<?php echo admin_url( 'admin.php?page=wc-settings&tab=integration&section=quaderno' ); ?>"
